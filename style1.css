@@ -443,7 +443,7 @@ kbd {
   overflow: visible;
 }
 
-.search-box {
+/* .search-box {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -456,8 +456,37 @@ kbd {
   transition: all var(--transition);
   position: relative;
   /* isolation: isolate; */
+  /*box-shadow: var(--shadow-sm);
+} */
+ .search-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-pill);
+  padding: 14px 22px;
+  transition: all var(--transition);
+  position: relative;
   box-shadow: var(--shadow-sm);
+  background: var(--bg-glass);  /* fallback */
 }
+
+.search-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.search-box > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 .search-box:focus-within {
   border-color: var(--border-glow);
@@ -481,11 +510,11 @@ kbd {
   outline: none;
   color: var(--text-primary);
   font-family: 'Manrope', sans-serif;
-  font-size: 16px;        /* keeps iOS from zooming */
+  font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  line-height: 1.5;       /* ← explicit value, not "normal" */
-  padding: 2px 0;         /* ← gives WebKit a real vertical anchor */
+  line-height: 1.5;
+  padding: 2px 0;
   caret-color: var(--accent-blue);
   -webkit-appearance: none;
   appearance: none;
