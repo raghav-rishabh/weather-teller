@@ -318,11 +318,17 @@ async function handleSearch(city) {
     populateWeatherCard(data);
     showCard();
 
-    localStorage.setItem(
+//     sessionStorage.setItem(
+//   'lastWeather',
+//   JSON.stringify(data)
+// );
+sessionStorage.setItem(
   'lastWeather',
-  JSON.stringify(data)
+  JSON.stringify({
+    data: data,
+    timestamp: Date.now()
+  })
 );
-
 
     // Record in recent searches (non-blocking)
     addRecentSearch(data.name).then(() => renderRecentList());
@@ -627,19 +633,53 @@ async function init() {
 
 
 
-  const savedWeather = localStorage.getItem('lastWeather');
+//   const savedWeather = sessionStorage.getItem('lastWeather');
+
+// if (savedWeather) {
+//   const parsedWeather = JSON.parse(savedWeather);
+
+//   state.currentCity = parsedWeather.name;
+//   state.currentData = parsedWeather;
+
+//   dom.searchInput.value = parsedWeather.name;
+// toggleClearBtn();
+
+//   populateWeatherCard(parsedWeather);
+//   showCard();
+// } else {
+//   showEmpty();
+// }
+
+const savedWeather = sessionStorage.getItem('lastWeather');
 
 if (savedWeather) {
   const parsedWeather = JSON.parse(savedWeather);
 
-  state.currentCity = parsedWeather.name;
-  state.currentData = parsedWeather;
+  const ONE_HOUR = 60 * 60 * 1000;
 
-  dom.searchInput.value = parsedWeather.name;
-toggleClearBtn();
+  // Check if expired
+  if (Date.now() - parsedWeather.timestamp > ONE_HOUR) {
 
-  populateWeatherCard(parsedWeather);
-  showCard();
+    // Remove expired data
+    sessionStorage.removeItem('lastWeather');
+
+    showEmpty();
+
+  } else {
+
+    // Use saved weather
+    state.currentCity = parsedWeather.data.name;
+    state.currentData = parsedWeather.data;
+
+    dom.searchInput.value = parsedWeather.data.name;
+
+    toggleClearBtn();
+
+    populateWeatherCard(parsedWeather.data);
+
+    showCard();
+  }
+
 } else {
   showEmpty();
 }
@@ -647,7 +687,7 @@ toggleClearBtn();
 
 
 
-  // Load sidebar data from Supabase / LocalStorage
+  // Load sidebar data from Supabase / sessionStorage
   await Promise.all([renderSavedList(), renderRecentList()]);
 
   // Auto-focus the search input on desktop
