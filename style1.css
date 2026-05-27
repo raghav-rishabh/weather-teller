@@ -1006,26 +1006,3 @@ kbd {
     font-size: 16px;
   }
 }
-@supports (-webkit-touch-callout: none) {
-
-  .search-box {
-    display: block;
-    position: relative;
-    padding-left: 56px;
-  }
-
-  .search-box__icon {
-    position: absolute;
-    left: 22px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .search-box__clear {
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-}
