@@ -396,6 +396,10 @@ kbd {
   border-radius: 50px;
   padding: 14px 20px;
   transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+   position: relative;
+  isolation: isolate;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .search-box:focus-within {
@@ -422,7 +426,15 @@ kbd {
   font-size: 1rem;
   font-weight: 400;
   caret-color: var(--accent-blue);
+  position: relative;
+z-index: 2;
+transform: translateZ(0);
 }
+
+.search-wrapper {
+  overflow: visible;
+}
+
 .search-box__input::placeholder { color: var(--text-muted); }
 
 .search-box__clear {
