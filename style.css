@@ -139,8 +139,7 @@ kbd {
   position: relative;
   z-index: 1;
   display: flex;
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100dvh;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -148,7 +147,7 @@ kbd {
 ══════════════════════════════════════════════════════════════ */
 .sidebar {
   width: var(--sidebar-w);
-  height: 100dvh;
+  min-height: 100dvh;
   /* background: rgba(10, 15, 28, 0.85); */
   background: rgba(255,255,255,0.55);
   backdrop-filter: blur(18px) saturate(150%);
@@ -315,8 +314,7 @@ kbd {
   display: flex;
   flex-direction: column;
   padding: 32px 40px 60px;
-  width: 100%;
-  max-width: none;
+  max-width: 80vw;
   min-width: 0;
 }
 
@@ -826,32 +824,7 @@ kbd {
   }
 
 }
-@media (max-width: 820px) {
 
-  .stat-card {
-    padding: 18px 12px;
-    min-height: 92px;
-  }
-
-  .stat-card__label {
-    font-size: 0.62rem;
-  }
-
-  .stat-card__value {
-    font-size: 0.95rem;
-  }
-
-  .stat-card__icon-wrap {
-    width: 32px;
-    height: 32px;
-  }
-
-  .stat-card__icon-wrap svg {
-    width: 16px;
-    height: 16px;
-  }
-
-}
 
 /* ── PROGRESS BARS ──────────────────────────────────────────── */
 .weather-card__bars {
