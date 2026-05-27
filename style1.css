@@ -979,3 +979,8 @@ kbd {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+@media (max-width: 768px) {
+  .search-box__input {
+    font-size: 16px;
+  }
+}
